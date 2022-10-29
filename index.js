@@ -8,8 +8,14 @@ let adverbs = ['slowly','diligently','warmly','sadly','rapidly']
 let details = ['near the river','at home','in the park']
 
 let askForSentence = function() {
-    rl.question('Click [Enter] to generate sentence',function() {
-        console.log(generateSentence());
+    rl.question('Click [Enter] to generate sentence ',function(text) {
+        
+        if(text !== '') {
+            console.log('ERROR! Input data is not required!');
+            return rl.close()
+        }
+
+        generateSentence();
         return rl.close()
     })
 }
@@ -27,8 +33,30 @@ function generateSentence() {
     let noun = generateRandomWord(nouns)
     let adverb = generateRandomWord(adverbs)
     let detail = generateRandomWord(details)
-    let result = `${name} from ${place} ${verb} ${noun} ${adverb} ${detail}`
-    return result;
+   
+    setTimeout(() => {
+        process.stdout.write(name);
+    }, 500);
+
+    setTimeout(() => {
+        process.stdout.write(' from ' + place + ' ');
+    }, 1000);
+
+    setTimeout(() => {
+        process.stdout.write(verb + ' ');
+    }, 1500);
+
+    setTimeout(() => {
+        process.stdout.write(noun + ' ');
+    }, 2000);
+
+    setTimeout(() => {
+        process.stdout.write(adverb + ' ');
+    }, 2500);
+
+    setTimeout(() => {
+        process.stdout.write(detail);
+    }, 3000);
 }
 
 askForSentence()
