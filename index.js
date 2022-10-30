@@ -16,7 +16,6 @@ let askForSentence = function() {
         }
 
         generateSentence();
-        return rl.close()
     })
 }
 
@@ -26,7 +25,7 @@ function generateRandomWord(arr) {
     return randomItem
 }
 
-function generateSentence() {
+ function generateSentence() {
     let name = generateRandomWord(names)
     let place = generateRandomWord(places)
     let verb = generateRandomWord(verbs)
@@ -34,8 +33,8 @@ function generateSentence() {
     let adverb = generateRandomWord(adverbs)
     let detail = generateRandomWord(details)
    
-    setTimeout(() => {
-        process.stdout.write(name);
+    setTimeout(() => { 
+        process.stdout.write(name);        
     }, 500);
 
     setTimeout(() => {
@@ -51,12 +50,58 @@ function generateSentence() {
     }, 2000);
 
     setTimeout(() => {
-        process.stdout.write(adverb + ' ');
+        process.stdout.write(adverb + '\n');
     }, 2500);
 
     setTimeout(() => {
         process.stdout.write(detail);
     }, 3000);
+
+    setTimeout(() => {
+        askForMoreSentences()
+    },3100)
+}
+
+function generateMultipleSentences() {
+    let name = generateRandomWord(names)
+    let place = generateRandomWord(places)
+    let verb = generateRandomWord(verbs)
+    let noun = generateRandomWord(nouns)
+    let adverb = generateRandomWord(adverbs)
+    let detail = generateRandomWord(details)
+    let result = `${name} from ${place} ${verb} ${noun} ${adverb} ${detail}`
+    return result;
+}
+
+let askForMoreSentences =  function() {
+    rl.question('Do you want to generate more sentences? (y/n): and press enter: ',function(answer) {
+        
+        if(answer === 'n') {
+            return rl.close()
+        }
+
+        else if(answer === 'y') {
+            rl.question("How many? Enter a number between (1-10): and press enter: ",function(digit) {
+                
+                let countSentences = Number(digit)
+                if(countSentences > 0 && countSentences <= 10) {
+                    for(let i = 0; i < countSentences; i++) {
+                        console.log(generateMultipleSentences())
+                    }
+                }
+                else {
+                    console.log('Error!Number must be in range (1-10)');
+                    askForMoreSentences()
+                }
+        askForMoreSentences()
+            })
+        }
+
+        else {
+            console.log('Invalid command! Choose y or n!');
+            askForMoreSentences()
+        }
+    })
 }
 
 askForSentence()
