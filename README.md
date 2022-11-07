@@ -41,7 +41,7 @@ The selected number of sentences from the user will be generated and displayed
 ## Live Demo:
 
 
-Click the link and press run to play the game 
+Click the link and press run to play the game:
 
 
 https://replit.com/@igachev/RandomSentenceGenerator#index.js
